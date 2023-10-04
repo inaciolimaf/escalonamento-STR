@@ -38,4 +38,4 @@ if __name__ == "__main__":
         periodo = transformarNumero(line["Período/Deadline"])
         tasks.append(Task(periodo, tempoComputacao))
     for i, task in enumerate(tasks):
-        cargaCumulativa(i, tasks, range(1, 10001))
+        cargaCumulativa(i+1, tasks, range(1, 10001))
