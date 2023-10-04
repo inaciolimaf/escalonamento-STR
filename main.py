@@ -17,9 +17,7 @@ def transformarNumero(numero: str):
     return int(numero)
 
 
-def cargaCumulativa(i: int, tasks: List[Task], ts: []):
-    uList = []
-    wList = []
+def cargaCumulativa(i: int, tasks: List[Task], ts: List[int]):
     for t in ts:
         u = 0
         w = 0
@@ -27,7 +25,7 @@ def cargaCumulativa(i: int, tasks: List[Task], ts: []):
             w += (t/tasks[j].P)*tasks[j].C
         u = w/t
         if u > 1:
-            print("A tarefa: {tasks[j]}, no tempo {t} não é escalonável")
+            print(f"No tempo {t} não é escalonável")
 
 
 if __name__ == "__main__":
@@ -40,4 +38,4 @@ if __name__ == "__main__":
         periodo = transformarNumero(line["Período/Deadline"])
         tasks.append(Task(periodo, tempoComputacao))
     for i, task in enumerate(tasks):
-        cargaCumulativa(i, tasks, range(1, 201))
+        cargaCumulativa(i, tasks, range(1, 10001))
