@@ -38,6 +38,10 @@ if __name__ == "__main__":
         tempoComputacao = transformarNumero(line["Tempo de Computação"])
         periodo = transformarNumero(line["Período/Deadline"])
         tasks.append(Task(periodo, tempoComputacao))
+    escalonavel = True
     for i, task in enumerate(tasks):
         if cargaCumulativa(i+1, tasks, range(1, 10001)):
+            escalonavel = False
             break
+    if escalonavel:
+        print("As tarefas são escalonáveis")
