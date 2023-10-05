@@ -26,6 +26,7 @@ def cargaCumulativa(i: int, tasks: List[Task], ts: List[int]):
         u = w/t
         if u > 1:
             print(f"No tempo {t} não é escalonável")
+            return True
 
 
 if __name__ == "__main__":
@@ -38,4 +39,5 @@ if __name__ == "__main__":
         periodo = transformarNumero(line["Período/Deadline"])
         tasks.append(Task(periodo, tempoComputacao))
     for i, task in enumerate(tasks):
-        cargaCumulativa(i+1, tasks, range(1, 10001))
+        if cargaCumulativa(i+1, tasks, range(1, 10001)):
+            break
