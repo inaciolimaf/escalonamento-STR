@@ -30,18 +30,20 @@ def cargaCumulativa(i: int, tasks: List[Task], ts: List[int]):
 
 
 if __name__ == "__main__":
-    tasks = []
-    df = pd.read_excel("MCMV - Definições.xlsx")
-    df = df.loc[df["Core"] == 1]
-    df = df.loc[df["Periódica"] == "Sim"]
-    for i, line in df.iterrows():
-        tempoComputacao = transformarNumero(line["Tempo de Computação"])
-        periodo = transformarNumero(line["Período/Deadline"])
-        tasks.append(Task(periodo, tempoComputacao))
-    escalonavel = True
-    for i, task in enumerate(tasks):
-        if cargaCumulativa(i+1, tasks, range(1, 10001)):
-            escalonavel = False
-            break
-    if escalonavel:
-        print("As tarefas são escalonáveis")
+    NUM_CORES = 3
+    for i in range(1, NUM_CORES+1):    
+        tasks = []
+        df = pd.read_excel("MCMV - Definições.xlsx")
+        df = df.loc[df["Core"] == i]
+        df = df.loc[df["Periódica"] == "Sim"]
+        for _, line in df.iterrows():
+            tempoComputacao = transformarNumero(line["Tempo de Computação"])
+            periodo = transformarNumero(line["Período = Deadline"])
+            tasks.append(Task(periodo, tempoComputacao))
+        escalonavel = True
+        for j, task in enumerate(tasks):
+            if cargaCumulativa(j+1, tasks, range(1, 10001)):
+                escalonavel = False
+                break
+        if escalonavel:
+            print(f"As tarefas são escalonáveis para o core {i}")
